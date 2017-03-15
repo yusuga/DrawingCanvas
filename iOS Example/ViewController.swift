@@ -14,24 +14,9 @@ class ViewController: UIViewController {
     let canvasViewUndoManager = UndoManager()
     
     @IBOutlet weak var toolControl: UISegmentedControl!
-    @IBAction func toolControlChanged(_ sender: UISegmentedControl) {
-        updateBrush()
-    }
-    var blendMode: CGBlendMode {
-        switch toolControl.selectedSegmentIndex {
-        case 0:
-            return .normal
-        case 1:
-            return .clear
-        default:
-            fatalError()
-        }
-    }
     
     @IBOutlet weak var widthControl: UISegmentedControl!
-    @IBAction func widthControlChanged(_ sender: UISegmentedControl) {
-        updateBrush()
-    }
+    
     var lineWidth: Double {
         switch widthControl.selectedSegmentIndex {
         case 0:
@@ -44,28 +29,16 @@ class ViewController: UIViewController {
     }
     
     @IBOutlet weak var colorControl: UISegmentedControl!
-    @IBAction func colorControlChanged(_ sender: UISegmentedControl) {
-        updateBrush()
-    }
-    var rgba: (red: Double, green: Double, blue: Double, alpha: Double) {
+    
+    var color: UIColor {
         switch colorControl.selectedSegmentIndex {
         case 0:
-            return (0, 0, 0, 1)
+            return .black
         case 1:
-            return (1, 0, 0, 1)
+            return .red
         default:
             fatalError()
         }
-    }
-    
-    var brush: Brush {
-        let rgba = self.rgba
-        return Brush(red: rgba.red,
-                     green: rgba.green,
-                     blue: rgba.blue,
-                     alpha: rgba.alpha,
-                     lineWidth: lineWidth,
-                     blendMode: blendMode)
     }
     
     @IBOutlet weak var canvasView: CanvasView! {
@@ -84,12 +57,6 @@ class ViewController: UIViewController {
     
     deinit {
         unregisterNotifications()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        updateBrush()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -120,10 +87,6 @@ class ViewController: UIViewController {
     }
     
     // MARK: -
-    
-    func updateBrush() {
-        canvasView.brush = brush
-    }
     
     @IBAction func undo() {
         canvasViewUndoManager.undo()
@@ -257,6 +220,17 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: CanvasViewDelegate {
+    func brush(for canvasView: CanvasView) -> Brush? {
+        switch toolControl.selectedSegmentIndex {
+        case 0:
+            return Brush(color: color, lineWidth: lineWidth)
+        case 1:
+            return Brush.eraser(lineWidth: lineWidth)
+        default:
+            fatalError()
+        }
+    }
+    
     func canvasView(_ canvasView: CanvasView, didUpdateDrawings drawings: [Drawable]) {
         print("Update drawings: \(drawings.count)")
         undoButton.isEnabled = canvasViewUndoManager.canUndo

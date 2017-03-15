@@ -62,9 +62,6 @@
                                     <segment title="Pen"/>
                                     <segment title="Eraser"/>
                                 </segments>
-                                <connections>
-                                    <action selector="toolControlChanged:" destination="14w-MC-O07" eventType="valueChanged" id="N8b-rf-Vzu"/>
-                                </connections>
                             </segmentedControl>
                         </barButtonItem>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="YiG-WJ-CKJ">
@@ -74,9 +71,6 @@
                                 <segment title="3"/>
                                 <segment title="10"/>
                             </segments>
-                            <connections>
-                                <action selector="widthControlChanged:" destination="14w-MC-O07" eventType="valueChanged" id="V6B-Yf-QfF"/>
-                            </connections>
                         </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" id="490-yb-dkj">
                             <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="HE0-4h-1tD">
@@ -86,9 +80,6 @@
                                     <segment title="Black"/>
                                     <segment title="Red"/>
                                 </segments>
-                                <connections>
-                                    <action selector="colorControlChanged:" destination="14w-MC-O07" eventType="valueChanged" id="tA3-uE-26i"/>
-                                </connections>
                             </segmentedControl>
                         </barButtonItem>
                     </navigationItem>

@@ -24,6 +24,33 @@ public class Brush: NSObject, NSCopying, NSCoding {
     
     // MARK: - Initializers
     
+    public convenience init(color: UIColor = .black,
+                            lineWidth: Double = 5,
+                            lineCap: CGLineCap = .round,
+                            blendMode: CGBlendMode = .normal)
+    {
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 1
+        
+        if !color.getRed(&red, green: &green, blue: &blue, alpha: &alpha) {
+            if color.getWhite(&red, alpha: &alpha) {
+                green = red
+                blue = red
+            } else {
+                assertionFailure("Unsupported flow.")
+            }
+        }
+        
+        self.init(red: Double(red),
+                  green: Double(green),
+                  blue: Double(blue),
+                  alpha: Double(alpha),
+                  lineWidth: lineWidth,
+                  blendMode: blendMode)
+    }
+    
     public init(red: Double,
                 green: Double,
                 blue: Double,
@@ -41,6 +68,14 @@ public class Brush: NSObject, NSCopying, NSCoding {
         self.lineCap = lineCap
         
         self.blendMode = blendMode
+    }
+    
+    public class func eraser(lineWidth: Double = 5,
+                             lineCap: CGLineCap = .round) -> Brush
+    {
+        return Brush(lineWidth: lineWidth,
+                     lineCap: lineCap,
+                     blendMode: .clear)
     }
     
     // MARK: - NSCopying

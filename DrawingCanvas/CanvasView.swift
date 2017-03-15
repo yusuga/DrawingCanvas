@@ -12,7 +12,6 @@ public class CanvasView: UIView {
     
     // MARK: - Properties
     
-    public var brush: Brush?
     public var delegate: CanvasViewDelegate?
     
     private var currentDrawingPath: DrawingPath?
@@ -113,7 +112,7 @@ public class CanvasView: UIView {
     // MARK: - Responding to Touch Events
     
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let brush = brush,
+        if let brush = delegate?.brush(for: self),
             let touch = touches.first
         {
             currentDrawingPath = DrawingPath(startPoint: touch.location(in: self),
