@@ -68,7 +68,7 @@ public class CanvasView: UIView {
                 let drawings = self.drawings
                 undoManager.registerUndo(withTarget: self) { canvasView in
                     canvasView.imageView.image = nil
-                    canvasView.drawings = drawings
+                    drawings.forEach { canvasView.appendDrawing($0) }
                 }
             }
             
