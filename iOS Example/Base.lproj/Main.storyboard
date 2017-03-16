@@ -54,15 +54,10 @@
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="2gW-X8-Ivy">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" id="UDz-5R-eJX">
-                            <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="bWd-JT-L1U">
-                                <rect key="frame" x="16" y="7" width="100" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="Pen"/>
-                                    <segment title="Eraser"/>
-                                </segments>
-                            </segmentedControl>
+                        <barButtonItem key="leftBarButtonItem" title="Pen" id="m33-XE-CCd">
+                            <connections>
+                                <action selector="toolButtonClicked:" destination="14w-MC-O07" id="pfR-fn-djp"/>
+                            </connections>
                         </barButtonItem>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="YiG-WJ-CKJ">
                             <rect key="frame" x="138" y="7" width="100" height="30"/>
@@ -87,7 +82,7 @@
                         <outlet property="canvasView" destination="E8g-3v-T8C" id="QTq-RS-49R"/>
                         <outlet property="colorControl" destination="HE0-4h-1tD" id="nbi-33-Ogv"/>
                         <outlet property="redoButton" destination="JKM-ib-Kpi" id="OCp-qs-bvJ"/>
-                        <outlet property="toolControl" destination="bWd-JT-L1U" id="ZQs-aV-v08"/>
+                        <outlet property="toolButton" destination="m33-XE-CCd" id="fbU-ao-9yF"/>
                         <outlet property="undoButton" destination="Er9-LB-RKG" id="Wrn-Il-boM"/>
                         <outlet property="widthControl" destination="YiG-WJ-CKJ" id="90R-Yg-ak8"/>
                     </connections>

@@ -15,7 +15,9 @@ public class Path: NSObject, Drawable {
     internal let bezierPath: UIBezierPath
     internal let brush: Brush
     
-    public required init(bezierPath: UIBezierPath, brush: Brush) {
+    // MARK: - Initializers
+    
+    public init(bezierPath: UIBezierPath, brush: Brush) {
         self.bezierPath = bezierPath
         self.brush = brush
     }

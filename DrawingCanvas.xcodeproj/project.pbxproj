@@ -21,6 +21,9 @@
 		B88E3FA31E776D3E00EB8447 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88E3FA21E776D3E00EB8447 /* Path.swift */; };
 		B88E3FA41E77743C00EB8447 /* DrawingCanvas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B88E3F731E76875800EB8447 /* DrawingCanvas.framework */; };
 		B88E3FA51E77743C00EB8447 /* DrawingCanvas.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B88E3F731E76875800EB8447 /* DrawingCanvas.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B8A6C9371E7A3779002C4205 /* DrawingShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A6C9361E7A3779002C4205 /* DrawingShape.swift */; };
+		B8A6C9391E7A459F002C4205 /* CanvasTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A6C9381E7A459F002C4205 /* CanvasTool.swift */; };
+		B8A6C93B1E7A5FF1002C4205 /* DrawingLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A6C93A1E7A5FF1002C4205 /* DrawingLine.swift */; };
 		B8C593861E7776A8007D87C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8C593851E7776A8007D87C5 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +68,9 @@
 		B88E3F9E1E7711C900EB8447 /* DrawingPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingPath.swift; sourceTree = "<group>"; };
 		B88E3FA01E7711DF00EB8447 /* DrawingImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingImage.swift; sourceTree = "<group>"; };
 		B88E3FA21E776D3E00EB8447 /* Path.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
+		B8A6C9361E7A3779002C4205 /* DrawingShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingShape.swift; sourceTree = "<group>"; };
+		B8A6C9381E7A459F002C4205 /* CanvasTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasTool.swift; sourceTree = "<group>"; };
+		B8A6C93A1E7A5FF1002C4205 /* DrawingLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingLine.swift; sourceTree = "<group>"; };
 		B8C593851E7776A8007D87C5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,8 +119,11 @@
 				B88E3F941E7687C300EB8447 /* CanvasView.swift */,
 				B88E3F9A1E76B5ED00EB8447 /* CanvasViewDelegate.swift */,
 				B88E3F9C1E7711B400EB8447 /* Drawable.swift */,
+				B8A6C9381E7A459F002C4205 /* CanvasTool.swift */,
 				B88E3FA21E776D3E00EB8447 /* Path.swift */,
 				B88E3F9E1E7711C900EB8447 /* DrawingPath.swift */,
+				B8A6C9361E7A3779002C4205 /* DrawingShape.swift */,
+				B8A6C93A1E7A5FF1002C4205 /* DrawingLine.swift */,
 				B88E3FA01E7711DF00EB8447 /* DrawingImage.swift */,
 				B88E3F961E7687D000EB8447 /* Brush.swift */,
 			);
@@ -251,8 +260,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8A6C9371E7A3779002C4205 /* DrawingShape.swift in Sources */,
 				B88E3F971E7687D000EB8447 /* Brush.swift in Sources */,
+				B8A6C9391E7A459F002C4205 /* CanvasTool.swift in Sources */,
 				B88E3FA31E776D3E00EB8447 /* Path.swift in Sources */,
+				B8A6C93B1E7A5FF1002C4205 /* DrawingLine.swift in Sources */,
 				B88E3F9B1E76B5ED00EB8447 /* CanvasViewDelegate.swift in Sources */,
 				B88E3FA11E7711DF00EB8447 /* DrawingImage.swift in Sources */,
 				B88E3F951E7687C300EB8447 /* CanvasView.swift in Sources */,

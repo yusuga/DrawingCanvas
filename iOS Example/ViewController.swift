@@ -13,7 +13,32 @@ class ViewController: UIViewController {
     
     let canvasViewUndoManager = UndoManager()
     
-    @IBOutlet weak var toolControl: UISegmentedControl!
+    @IBOutlet weak var toolButton: UIBarButtonItem!
+    @IBAction func toolButtonClicked(_ sender: UIBarButtonItem) {
+        let sheet = UIAlertController(title: "Tool", message: nil, preferredStyle: .actionSheet)
+        
+        sheet.addAction(UIAlertAction(title: "Pen", style: .default) { action in
+            sender.title = action.title
+            self.tool = .pen
+        })
+        
+        sheet.addAction(UIAlertAction(title: "Eraser", style: .default) { action in
+            sender.title = action.title
+            self.tool = .eraser
+        })
+        
+        sheet.addAction(UIAlertAction(title: "Line", style: .default) { action in
+            sender.title = action.title
+            self.tool = .line
+        })
+        
+        if let popoverPresentationController = sheet.popoverPresentationController {
+            popoverPresentationController.barButtonItem = sender
+        }
+        
+        present(sheet, animated: true)
+    }
+    var tool = DrawingTool.pen
     
     @IBOutlet weak var widthControl: UISegmentedControl!
     
@@ -220,15 +245,12 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: CanvasViewDelegate {
+    func tool(for canvasView: CanvasView) -> DrawingTool? {
+        return tool
+    }
+    
     func brush(for canvasView: CanvasView) -> Brush? {
-        switch toolControl.selectedSegmentIndex {
-        case 0:
-            return Brush(color: color, lineWidth: lineWidth)
-        case 1:
-            return Brush.eraser(lineWidth: lineWidth)
-        default:
-            fatalError()
-        }
+        return Brush(color: color, lineWidth: lineWidth)
     }
     
     func canvasView(_ canvasView: CanvasView, didUpdateDrawings drawings: [Drawable]) {

@@ -8,14 +8,13 @@
 
 import Foundation
 
-public class DrawingPath: Path {
+public class DrawingPath: Path, DrawablePath {
     
     // MARK: - Properties
     
     private var pointIndex = 0
     private var points = [CGPoint?](repeating: CGPoint.zero, count: 5)
-    
-    
+        
     // MARK: - Initializers
     
     public convenience init(startPoint: CGPoint, brush: Brush) {
@@ -23,13 +22,16 @@ public class DrawingPath: Path {
         path.move(to: startPoint)
         path.addLine(to: startPoint)
         self.init(bezierPath: path, brush: brush)
-        
-        points[0] = startPoint
     }
     
-    // MARK: - Path
+    internal override init(bezierPath: UIBezierPath, brush: Brush) {
+        points[0] = bezierPath.cgPath.currentPoint
+        super.init(bezierPath: bezierPath, brush: brush)
+    }
     
-    internal func addPoint(_ point: CGPoint) {
+    // MARK: - DrawablePath
+    
+    public func addPoint(_ point: CGPoint) {
         /*
          Smooth Freehand Drawing on iOS
          https://code.tutsplus.com/tutorials/smooth-freehand-drawing-on-ios--mobile-13164

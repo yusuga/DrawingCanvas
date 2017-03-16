@@ -11,3 +11,7 @@ import Foundation
 public protocol Drawable: NSCopying, NSCoding {
     func draw(in context: CGContext)
 }
+
+public protocol DrawablePath: Drawable {
+    func addPoint(_ point: CGPoint)
+}

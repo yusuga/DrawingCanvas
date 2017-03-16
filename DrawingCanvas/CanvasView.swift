@@ -14,9 +14,10 @@ public class CanvasView: UIView {
     
     public var delegate: CanvasViewDelegate?
     
-    private var currentDrawingPath: DrawingPath?
+    private var currentDrawingPath: DrawablePath?
     private var drawings = [Drawable]() {
         didSet {
+            drawingsImage = nil
             needsUpdateImage = true
         }
     }
@@ -26,6 +27,7 @@ public class CanvasView: UIView {
         imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         return imageView
     }()
+    private var drawingsImage: UIImage?
     private var needsUpdateImage = false {
         didSet {
             if needsUpdateImage {
@@ -45,8 +47,6 @@ public class CanvasView: UIView {
     }
     
     public func setDrawings(_ drawings: [Drawable]) {
-        imageView.image = nil
-        
         let undoManager = delegate?.undoManager(for: self)
         
         if drawings.count > 0 {
@@ -55,7 +55,6 @@ public class CanvasView: UIView {
             
             for drawing in drawings {
                 undoManager?.beginUndoGrouping()
-                self.imageView.image = nil
                 self.appendDrawing(drawing)
                 undoManager?.endUndoGrouping()
             }
@@ -67,7 +66,6 @@ public class CanvasView: UIView {
             if let undoManager = undoManager {
                 let drawings = self.drawings
                 undoManager.registerUndo(withTarget: self) { canvasView in
-                    canvasView.imageView.image = nil
                     drawings.forEach { canvasView.appendDrawing($0) }
                 }
             }
@@ -81,7 +79,6 @@ public class CanvasView: UIView {
         
         if let undoManager = delegate?.undoManager(for: self) {
             undoManager.registerUndo(withTarget: self) { canvasView in
-                canvasView.imageView.image = nil
                 canvasView.popDrawing()
             }
         }
@@ -92,7 +89,6 @@ public class CanvasView: UIView {
             let undoManager = delegate?.undoManager(for: self)
         {
             undoManager.registerUndo(withTarget: self) { canvasView in
-                canvasView.imageView.image = nil
                 canvasView.appendDrawing(drawing)
             }
         }
@@ -112,11 +108,12 @@ public class CanvasView: UIView {
     // MARK: - Responding to Touch Events
     
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let brush = delegate?.brush(for: self),
+        if let tool = delegate?.tool(for: self),
+            let brush = delegate?.brush(for: self),
             let touch = touches.first
         {
-            currentDrawingPath = DrawingPath(startPoint: touch.location(in: self),
-                                             brush: brush)
+            currentDrawingPath = tool.drawingPath(startPoint: touch.location(in: self),
+                                                  brush: brush)
             needsUpdateImage = true
         }
     }
@@ -151,10 +148,11 @@ public class CanvasView: UIView {
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
         
         if let context = UIGraphicsGetCurrentContext() {
-            if let image = imageView.image {
-                image.draw(at: CGPoint.zero)
+            if let drawingsImage = drawingsImage {
+                drawingsImage.draw(at: CGPoint.zero)
             } else {
                 drawings.forEach { $0.draw(in: context) }
+                drawingsImage = UIGraphicsGetImageFromCurrentImageContext()
             }
             
             currentDrawingPath?.draw(in: context)
@@ -168,6 +166,7 @@ public class CanvasView: UIView {
             imageView.image = image
             
             if currentDrawingPath == nil {
+                drawingsImage = image
                 delegate?.canvasView(self, didUpdateDrawings: drawings)
                 delegate?.canvasView(self, didUpdateImage: image)
             }
