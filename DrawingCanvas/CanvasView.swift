@@ -38,8 +38,8 @@ public class CanvasView: UIView {
     
     // MARK: - Drawing
     
-    public func setImage(_ image: UIImage) {
-        appendDrawing(DrawingImage(image: image))
+    public func setInitialImage(_ image: UIImage) {
+        drawings.insert(DrawingImage(image: image), at: 0)
     }
     
     public func clear() {

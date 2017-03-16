@@ -183,7 +183,7 @@ class ViewController: UIViewController {
             fatalError()
         }
         
-        canvasView.setImage(image)
+        canvasView.setInitialImage(image)
     }
     
     var imagePath: String {
@@ -225,6 +225,11 @@ class ViewController: UIViewController {
                            selector: #selector(undoManagerDidRedoChange(notification:)),
                            name: .NSUndoManagerDidRedoChange,
                            object: canvasViewUndoManager)
+        
+        center.addObserver(self,
+                           selector: #selector(undoManagerDidCloseUndoGroup(notification:)),
+                           name: .NSUndoManagerDidCloseUndoGroup,
+                           object: canvasViewUndoManager)
     }
     
     func unregisterNotifications() {
@@ -234,12 +239,20 @@ class ViewController: UIViewController {
     // MARK: Notification Handler
     
     func undoManagerDidUndoChange(notification: NSNotification) {
-        print("Undo change")
+        print(">Undo change")
         undoButton.isEnabled = canvasViewUndoManager.canUndo
+        redoButton.isEnabled = canvasViewUndoManager.canRedo
     }
     
     func undoManagerDidRedoChange(notification: NSNotification) {
-        print("Redo change")
+        print(">Redo change")
+        undoButton.isEnabled = canvasViewUndoManager.canUndo
+        redoButton.isEnabled = canvasViewUndoManager.canRedo
+    }
+    
+    func undoManagerDidCloseUndoGroup(notification: NSNotification) {
+        print(">Undo Did close undo group")
+        undoButton.isEnabled = canvasViewUndoManager.canUndo
         redoButton.isEnabled = canvasViewUndoManager.canRedo
     }
 }
@@ -255,8 +268,6 @@ extension ViewController: CanvasViewDelegate {
     
     func canvasView(_ canvasView: CanvasView, didUpdateDrawings drawings: [Drawable]) {
         print("Update drawings: \(drawings.count)")
-        undoButton.isEnabled = canvasViewUndoManager.canUndo
-        redoButton.isEnabled = canvasViewUndoManager.canRedo
         saveDrawings(drawings)
     }
     
