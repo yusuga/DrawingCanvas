@@ -165,7 +165,7 @@ class ViewController: UIViewController {
         let documentDir = NSSearchPathForDirectoriesInDomains(.documentDirectory,
                                                               .allDomainsMask,
                                                               true).first!
-        return (documentDir as NSString).appendingPathComponent("image.jpg")
+        return (documentDir as NSString).appendingPathComponent("image.png")
     }
     
     // MARK: - 
@@ -238,7 +238,7 @@ extension ViewController: CanvasViewDelegate {
         saveDrawings(drawings)
     }
     
-    func canvasView(_ canvasView: CanvasView, didUpdateImage image: UIImage?) {
+    func canvasView(_ canvasView: CanvasView, didUpdateImage image: UIImage) {
         print("Update images: \(image)")
         saveImage(image)
     }
