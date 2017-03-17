@@ -78,6 +78,20 @@ public class Brush: NSObject, NSCopying, NSCoding {
                      blendMode: .clear)
     }
     
+    // MARK: Equatable
+    
+    static func ==(lhs: Brush, rhs: Brush) -> Bool {
+        return lhs.red == rhs.red
+            && lhs.green == rhs.green
+            && lhs.blue == rhs.blue
+            && lhs.alpha == rhs.alpha
+            
+            && lhs.lineWidth == rhs.lineWidth
+            && lhs.lineCap == rhs.lineCap
+            
+            && lhs.blendMode == rhs.blendMode
+    }    
+    
     // MARK: - NSCopying
     
     public func copy(with zone: NSZone? = nil) -> Any {
