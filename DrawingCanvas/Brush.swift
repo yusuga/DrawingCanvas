@@ -22,6 +22,8 @@ public class Brush: NSObject, NSCopying, NSCoding {
     
     public let blendMode: CGBlendMode
     
+    public var isSmoothDrawing = true
+    
     // MARK: - Initializers
     
     public convenience init(color: UIColor = .black,

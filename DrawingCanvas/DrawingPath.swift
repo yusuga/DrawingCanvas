@@ -32,6 +32,11 @@ public class DrawingPath: Path, DrawablePath {
     // MARK: - DrawablePath
     
     public func addPoint(_ point: CGPoint) {
+        if !brush.isSmoothDrawing {
+            bezierPath.addLine(to: point)
+            return
+        }
+        
         /*
          Smooth Freehand Drawing on iOS
          https://code.tutsplus.com/tutorials/smooth-freehand-drawing-on-ios--mobile-13164
