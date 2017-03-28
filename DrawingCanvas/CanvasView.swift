@@ -12,7 +12,7 @@ public class CanvasView: UIView {
     
     // MARK: - Properties
     
-    public var delegate: CanvasViewDelegate?
+    public weak var delegate: CanvasViewDelegate?
     
     private var currentDrawingPath: DrawablePath?
     private var drawings = [Drawable]() {

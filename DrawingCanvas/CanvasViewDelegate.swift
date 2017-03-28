@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol CanvasViewDelegate {
+public protocol CanvasViewDelegate: class {
     func brush(for canvasView: CanvasView) -> Brush?
     func tool(for canvasView: CanvasView) -> DrawingTool?
     func canvasView(_ canvasView: CanvasView, didUpdateDrawings drawings: [Drawable])
