@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "DrawingCanvas"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "It is a touch drawing view based on image and bezier path."
   s.homepage     = "https://github.com/yusuga/DrawingCanvas"
 #  s.screenshots  = ""
