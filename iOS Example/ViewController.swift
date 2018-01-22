@@ -238,19 +238,19 @@ class ViewController: UIViewController {
     
     // MARK: Notification Handler
     
-    func undoManagerDidUndoChange(notification: NSNotification) {
+    @objc func undoManagerDidUndoChange(notification: NSNotification) {
         print(">Undo change")
         undoButton.isEnabled = canvasViewUndoManager.canUndo
         redoButton.isEnabled = canvasViewUndoManager.canRedo
     }
     
-    func undoManagerDidRedoChange(notification: NSNotification) {
+    @objc func undoManagerDidRedoChange(notification: NSNotification) {
         print(">Redo change")
         undoButton.isEnabled = canvasViewUndoManager.canUndo
         redoButton.isEnabled = canvasViewUndoManager.canRedo
     }
     
-    func undoManagerDidCloseUndoGroup(notification: NSNotification) {
+    @objc func undoManagerDidCloseUndoGroup(notification: NSNotification) {
         print(">Undo Did close undo group")
         undoButton.isEnabled = canvasViewUndoManager.canUndo
         redoButton.isEnabled = canvasViewUndoManager.canRedo
